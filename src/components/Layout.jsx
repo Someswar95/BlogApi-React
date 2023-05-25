@@ -2,6 +2,7 @@ import React, { Fragment } from "react";
 import { Box } from "@mui/material";
 
 const Navbar = React.lazy(() => import("./Navbar"));
+const Footer = React.lazy(() => import("./Footer"));
 
 const Layout = ({ title = "Welcome to our website", children }) => {
   return (
@@ -9,6 +10,7 @@ const Layout = ({ title = "Welcome to our website", children }) => {
       <Box>
         <Navbar brand="Blogify" />
         {children}
+        {/* <Footer /> */}
       </Box>
     </Fragment>
   );

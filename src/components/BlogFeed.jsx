@@ -2,6 +2,7 @@ import * as React from "react";
 import { Box, Grid, Typography } from "@mui/material";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { loadAllPosts } from "../services/PostService";
+import { toast } from "react-toastify";
 
 // dynamic import
 const Blog = React.lazy(() => import("./Blog"));
