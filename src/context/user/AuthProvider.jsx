@@ -1,21 +1,22 @@
-import React, { useEffect, useState } from "react";
-import { currentUserDetail, isLoggedIn } from "../../authorization/auth";
+import * as React from "react";
+import UserContext from "./userContext";
+import { currentUserDetail, isAuthenticated } from "../../authorization/auth";
 
 const AuthProvider = (props) => {
-  const [user, setUser] = useState({
+  const [user, setUser] = React.useState({
     data: {},
     login: false,
   });
 
-  useEffect(() => {
+  React.useEffect(() => {
     setUser({
       data: currentUserDetail(),
-      login: isLoggedIn(),
+      login: isAuthenticated(),
     });
   }, []);
 
   return (
-    <UserContext.Provider value={{ user }}>
+    <UserContext.Provider value={{ user, setUser }}>
       {props.children}
     </UserContext.Provider>
   );

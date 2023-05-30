@@ -1,20 +1,17 @@
-import React, { Fragment } from "react";
+import * as React from "react";
 import { Box } from "@mui/material";
 import CustomNavbar from "./CustomNavbar";
-
-const Navbar = React.lazy(() => import("./Navbar"));
-const Footer = React.lazy(() => import("./Footer"));
+// import Footer from "./Footer";
 
 const Layout = ({ title = "Welcome to our website", children }) => {
   return (
-    <Fragment>
+    <React.Fragment>
       <Box>
-        {/* <Navbar brand="Blogify" /> */}
         <CustomNavbar brand="Blogify" />
         {children}
         {/* <Footer /> */}
       </Box>
-    </Fragment>
+    </React.Fragment>
   );
 };
 

@@ -13,28 +13,31 @@ import PrivateRoutes from "./utils/PrivateRoutes";
 import AddPost from "./pages/post/AddPost";
 import Error404 from "./components/Error404";
 import { ToastContainer } from "react-toastify";
+import AuthProvider from "./context/user/AuthProvider";
 
 function App() {
   return (
     <ThemeProvider theme={theme}>
-      <BrowserRouter>
-        <ToastContainer position="bottom-right" />
-        <Layout>
-          <Routes>
-            <Route>
-              <Route exact path="/" element={<Home />} />
-            </Route>
-            <Route path="/" element={<AuthRoutes />}>
-              <Route path="authorization/login" element={<Login />} />
-              <Route path="authorization/register" element={<Register />} />
-            </Route>
-            <Route path="/" element={<PrivateRoutes />}>
-              <Route path="/addpost" element={<AddPost />} />
-            </Route>
-            <Route path="*" element={<Error404 />} />
-          </Routes>
-        </Layout>
-      </BrowserRouter>
+      <AuthProvider>
+        <BrowserRouter>
+          <ToastContainer position="bottom-right" />
+          <Layout>
+            <Routes>
+              <Route>
+                <Route exact path="/" element={<Home />} />
+              </Route>
+              <Route path="/" element={<AuthRoutes />}>
+                <Route path="authorization/login" element={<Login />} />
+                <Route path="authorization/register" element={<Register />} />
+              </Route>
+              <Route path="/" element={<PrivateRoutes />}>
+                <Route path="/addpost" element={<AddPost />} />
+              </Route>
+              <Route path="*" element={<Error404 />} />
+            </Routes>
+          </Layout>
+        </BrowserRouter>
+      </AuthProvider>
     </ThemeProvider>
   );
 }
