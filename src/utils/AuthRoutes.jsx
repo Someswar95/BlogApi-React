@@ -1,9 +1,9 @@
 import React from "react";
-import { isLoggedIn } from "../authorization/auth";
+import { isAuthenticated } from "../authorization/auth";
 import { Navigate, Outlet } from "react-router-dom";
 
 const AuthRoutes = () => {
-  return !isLoggedIn() ? <Outlet /> : <Navigate to="/" />;
+  return !isAuthenticated() ? <Outlet /> : <Navigate to="/" />;
 };
 
 export default AuthRoutes;

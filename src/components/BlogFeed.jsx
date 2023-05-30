@@ -45,7 +45,7 @@ const BlogFeed = () => {
       })
       .catch((error) => {
         console.log(error);
-        toast.error("Error in loading posts");
+        // toast.error("Error in loading posts");
       });
   };
 

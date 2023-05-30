@@ -10,10 +10,13 @@ import {
   useScrollTrigger,
   CssBaseline,
   Button,
-  useTheme,
-  useMediaQuery,
+  Tooltip,
+  Avatar,
+  Menu,
+  MenuItem,
 } from "@mui/material";
 import { AiOutlineSearch } from "react-icons/ai";
+import { IoIosNotificationsOutline } from "react-icons/io";
 import PropTypes from "prop-types";
 import { doLogout, isLoggedIn } from "../authorization/auth";
 import { NavLink, useNavigate } from "react-router-dom";
@@ -75,28 +78,23 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-export default function Navbar(props) {
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+export default function CustomNavbar(props) {
+  const [anchorElNav, setAnchorElNav] = React.useState(null);
+  const [anchorElUser, setAnchorElUser] = React.useState(null);
 
-  const isMenuOpen = Boolean(anchorEl);
-  const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
-
-  const handleProfileMenuOpen = (event) => {
-    setAnchorEl(event.currentTarget);
+  const handleOpenNavMenu = (event) => {
+    setAnchorElNav(event.currentTarget);
+  };
+  const handleOpenUserMenu = (event) => {
+    setAnchorElUser(event.currentTarget);
   };
 
-  const handleMobileMenuClose = () => {
-    setMobileMoreAnchorEl(null);
+  const handleCloseNavMenu = () => {
+    setAnchorElNav(null);
   };
 
-  const handleMenuClose = () => {
-    setAnchorEl(null);
-    handleMobileMenuClose();
-  };
-
-  const handleMobileMenuOpen = (event) => {
-    setMobileMoreAnchorEl(event.currentTarget);
+  const handleCloseUserMenu = () => {
+    setAnchorElUser(null);
   };
 
   const [login, setLogin] = React.useState(false);
@@ -128,6 +126,8 @@ export default function Navbar(props) {
       path: "/authorization/register",
     },
   ];
+
+  const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
   return (
     <React.Fragment>
@@ -231,9 +231,12 @@ export default function Navbar(props) {
                             : "";
                         }}
                       >
-                        Add post
+                        Write
                       </NavLink>
                     </Button>
+
+                    {/* <IoIosNotificationsOutline /> */}
+
                     <Button variant="text">
                       <NavLink
                         onClick={logout}
@@ -254,6 +257,40 @@ export default function Navbar(props) {
                         Sign out
                       </NavLink>
                     </Button>
+                    <Box sx={{ flexGrow: 0 }}>
+                      <Tooltip title="Open settings">
+                        <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                          <Avatar
+                            alt="Remy Sharp"
+                            src="/static/images/avatar/2.jpg"
+                          />
+                        </IconButton>
+                      </Tooltip>
+                      <Menu
+                        sx={{ mt: "45px" }}
+                        id="menu-appbar"
+                        anchorEl={anchorElUser}
+                        anchorOrigin={{
+                          vertical: "top",
+                          horizontal: "right",
+                        }}
+                        keepMounted
+                        transformOrigin={{
+                          vertical: "top",
+                          horizontal: "right",
+                        }}
+                        open={Boolean(anchorElUser)}
+                        onClose={handleCloseUserMenu}
+                      >
+                        {settings.map((setting) => (
+                          <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                            <Typography textAlign="center">
+                              {setting}
+                            </Typography>
+                          </MenuItem>
+                        ))}
+                      </Menu>
+                    </Box>
                   </>
                 )}
               </Box>

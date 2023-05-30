@@ -1,14 +1,13 @@
 import * as React from "react";
-
-const BlogFeed = React.lazy(() => import("../components/BlogFeed"));
+import BlogFeed from "../components/BlogFeed";
 
 const Home = () => {
   return (
-    <>
-      <React.Suspense fallback={<div>Page is Loading...</div>}>
-        <BlogFeed />
-      </React.Suspense>
-    </>
+    <React.Fragment>
+      {/* <Layout> */}
+      <BlogFeed />
+      {/* </Layout> */}
+    </React.Fragment>
   );
 };
 
