@@ -56,7 +56,7 @@ const BlogFeed = () => {
     <React.Fragment>
       <Box
         sx={{
-          margin: "80px 60px 50px 58px",
+          margin: "40px 60px 50px 58px",
         }}
       >
         <InfiniteScroll
