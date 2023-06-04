@@ -2,23 +2,37 @@ import * as React from "react";
 import PropTypes from "prop-types";
 import {
   AppBar,
-  Avatar,
   Box,
   Button,
   Container,
-  CssBaseline,
-  IconButton,
-  Menu,
-  MenuItem,
   Slide,
   Toolbar,
-  Tooltip,
   Typography,
   useScrollTrigger,
 } from "@mui/material";
-import { Link, useNavigate } from "react-router-dom";
-import { MdKeyboardArrowDown } from "react-icons/md";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { doLogout, isAuthenticated } from "../authorization/auth";
+
+const authItems = [
+  {
+    text: "Sign In",
+    path: "/authorization/login",
+  },
+  {
+    text: "Get started",
+    path: "/authorization/register",
+  },
+];
+
+const navItems = [
+  {
+    text: "Write",
+    path: "/addpost",
+  },
+  {
+    text: "Sign out",
+  },
+];
 
 function HideOnScroll(props) {
   const { children, window } = props;
@@ -71,7 +85,6 @@ const CustomNavbar = (props) => {
 
   return (
     <React.Fragment>
-      {/* <CssBaseline /> */}
       <HideOnScroll {...props}>
         <AppBar position="static" variant="outlined">
           <Container maxWidth="xl">
@@ -99,86 +112,67 @@ const CustomNavbar = (props) => {
               </Typography>
               <Box sx={{ flexGrow: 1 }} />
               <Box
-                sx={{ display: { xs: "none", md: "flex", columnGap: "20px" } }}
+                sx={{
+                  display: {
+                    xs: "none",
+                    sm: "block",
+                  },
+                }}
               >
                 {login ? (
                   <>
-                    <Button
-                      variant="text"
-                      component={Link}
-                      to="/addpost"
-                      sx={{
-                        my: 2,
-                        display: "block",
-                        "&.MuiButtonBase-root:hover": {
-                          bgcolor: "transparent",
-                        },
-                      }}
-                    >
-                      Write
-                    </Button>
-                    <Box>
-                      <Tooltip title="Open settings">
-                        <IconButton
-                          onClick={handleOpenUserMenu}
-                          sx={{ p: 0, ":hover": { background: "none" } }}
-                        >
-                          <Avatar alt="Remy Sharp" src="" />
-                          <MdKeyboardArrowDown />
-                        </IconButton>
-                      </Tooltip>
-                      <Menu
-                        sx={{ mt: "45px" }}
-                        id="menu-appbar"
-                        anchorEl={anchorElUser}
-                        anchorOrigin={{
-                          vertical: "top",
-                          horizontal: "right",
+                    {navItems.map((item, index) => (
+                      <NavLink
+                        key={index}
+                        to={item.path}
+                        onclick={item.text == "Sign out" ? handleLogout : ""}
+                        style={({ isActive }) => {
+                          return {
+                            textDecoration: "none",
+                            color: isActive ? "red" : "black",
+                            marginLeft: "20px",
+                          };
                         }}
-                        keepMounted
-                        transformOrigin={{
-                          vertical: "top",
-                          horizontal: "right",
+                        className={({ isActive, isPending }) => {
+                          return isActive
+                            ? "active"
+                            : isPending
+                            ? "pending"
+                            : "";
                         }}
-                        open={Boolean(anchorElUser)}
-                        onClose={handleCloseUserMenu}
+                        end
+                        caseSensitive
                       >
-                        <MenuItem onClick={handleCloseUserMenu}>
-                          <Button textAlign="center" onClick={handleLogout}>
-                            Logout
-                          </Button>
-                        </MenuItem>
-                      </Menu>
-                    </Box>
+                        {item.text}
+                      </NavLink>
+                    ))}
                   </>
                 ) : (
                   <>
-                    <Button
-                      variant="text"
-                      component={Link}
-                      to="/authorization/login"
-                      sx={{
-                        my: 2,
-                        display: "block",
-                        "&.MuiButtonBase-root:hover": {
-                          bgcolor: "transparent",
-                        },
-                      }}
-                    >
-                      Sign In
-                    </Button>
-                    <Button
-                      variant="contained"
-                      component={Link}
-                      to="/authorization/register"
-                      sx={{
-                        my: 2,
-                        display: "block",
-                        borderRadius: "20px",
-                      }}
-                    >
-                      Get started
-                    </Button>
+                    {authItems.map((item, index) => (
+                      <NavLink
+                        key={index}
+                        to={item.path}
+                        style={({ isActive }) => {
+                          return {
+                            textDecoration: "none",
+                            color: isActive ? "red" : "black",
+                            marginLeft: "20px",
+                          };
+                        }}
+                        className={({ isActive, isPending }) => {
+                          return isActive
+                            ? "active"
+                            : isPending
+                            ? "pending"
+                            : "";
+                        }}
+                        end
+                        caseSensitive
+                      >
+                        {item.text}
+                      </NavLink>
+                    ))}
                   </>
                 )}
               </Box>

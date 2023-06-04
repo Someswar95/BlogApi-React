@@ -56,7 +56,7 @@ const BlogFeed = () => {
     <React.Fragment>
       <Box
         sx={{
-          margin: "40px 60px 50px 58px",
+          margin: "30px 85px 25px 85px",
         }}
       >
         <InfiniteScroll
@@ -70,7 +70,7 @@ const BlogFeed = () => {
             </Typography>
           }
         >
-          <Grid container spacing={2}>
+          <Grid container spacing={4}>
             {postContent.content.map((blog, index) => (
               <Grid key={index} item xs={4}>
                 {/* <Suspense> */}
