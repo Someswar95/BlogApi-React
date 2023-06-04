@@ -29,9 +29,6 @@ const navItems = [
     text: "Write",
     path: "/addpost",
   },
-  {
-    text: "Sign out",
-  },
 ];
 
 function HideOnScroll(props) {
@@ -146,6 +143,23 @@ const CustomNavbar = (props) => {
                         {item.text}
                       </NavLink>
                     ))}
+                    <NavLink
+                      style={({ isActive }) => {
+                        return {
+                          textDecoration: "none",
+                          color: isActive ? "red" : "black",
+                          marginLeft: "20px",
+                        };
+                      }}
+                      className={({ isActive, isPending }) => {
+                        return isActive ? "active" : isPending ? "pending" : "";
+                      }}
+                      onClick={handleLogout}
+                      end
+                      caseSensitive
+                    >
+                      Sign out
+                    </NavLink>
                   </>
                 ) : (
                   <>

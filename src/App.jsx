@@ -27,11 +27,15 @@ function App() {
                 <Route exact path="/" element={<Home />} />
               </Route>
               <Route path="/" element={<AuthRoutes />}>
-                <Route path="authorization/login" element={<Login />} />
-                <Route path="authorization/register" element={<Register />} />
+                <Route exact path="authorization/login" element={<Login />} />
+                <Route
+                  exact
+                  path="authorization/register"
+                  element={<Register />}
+                />
               </Route>
               <Route path="/" element={<PrivateRoutes />}>
-                <Route path="/addpost" element={<AddPost />} />
+                <Route exact path="/addpost" element={<AddPost />} />
               </Route>
               <Route path="*" element={<Error404 />} />
             </Routes>
