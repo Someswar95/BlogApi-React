@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import {
   AppBar,
   Box,
-  Button,
   Container,
   Slide,
   Toolbar,
@@ -16,11 +15,11 @@ import { doLogout, isAuthenticated } from "../authorization/auth";
 const authItems = [
   {
     text: "Sign In",
-    path: "/authorization/login",
+    path: "/auth/login",
   },
   {
     text: "Get started",
-    path: "/authorization/register",
+    path: "/auth/register",
   },
 ];
 

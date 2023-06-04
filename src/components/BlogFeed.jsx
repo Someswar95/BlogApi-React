@@ -3,6 +3,7 @@ import { Box, Grid, Typography } from "@mui/material";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { loadAllPosts } from "../services/PostService";
 import { toast } from "react-toastify";
+import { ScrollRestoration } from "react-router-dom";
 
 // dynamic import
 const Blog = React.lazy(() => import("./Blog"));
@@ -41,7 +42,6 @@ const BlogFeed = () => {
           lastPage: data.lastPage,
           pageNumber: data.pageNumber,
         });
-        console.log(data);
       })
       .catch((error) => {
         console.log(error);

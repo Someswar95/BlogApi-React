@@ -1,11 +1,11 @@
-import React, { Suspense, lazy } from "react";
+import * as React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { ThemeProvider } from "@mui/material";
 import "./App.css";
 import "react-toastify/dist/ReactToastify.css";
 import theme from "./assets/theme";
-import Home from "./pages/Home";
 import Layout from "./components/Layout";
+import Home from "./pages/Home";
 import AuthRoutes from "./utils/AuthRoutes";
 import Login from "./pages/auth/Login";
 import Register from "./pages/auth/Register";
@@ -23,16 +23,10 @@ function App() {
           <ToastContainer position="bottom-right" />
           <Layout>
             <Routes>
-              <Route>
-                <Route exact path="/" element={<Home />} />
-              </Route>
-              <Route path="/" element={<AuthRoutes />}>
-                <Route exact path="authorization/login" element={<Login />} />
-                <Route
-                  exact
-                  path="authorization/register"
-                  element={<Register />}
-                />
+              <Route exact path="/" element={<Home />} />
+              <Route path="/auth" element={<AuthRoutes />}>
+                <Route exact path="login" element={<Login />} />
+                <Route exact path="register" element={<Register />} />
               </Route>
               <Route path="/" element={<PrivateRoutes />}>
                 <Route exact path="/addpost" element={<AddPost />} />
