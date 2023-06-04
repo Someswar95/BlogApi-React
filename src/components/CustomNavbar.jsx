@@ -89,7 +89,7 @@ const CustomNavbar = (props) => {
               disableGutters
               sx={{ marginLeft: "60px", marginRight: "60px" }}
             >
-              <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
+              {/* <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} /> */}
               <Typography
                 variant="h6"
                 color="primary.main"
